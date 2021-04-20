@@ -63,7 +63,7 @@ class Event
   def total_inventory
     items = []
 
-    @food_trucks.each do |truck|
+      @food_trucks.each do |truck|
       truck.inventory.each do |item, quantity|
         items << item
       end
@@ -81,4 +81,11 @@ class Event
     end
     hash
   end
+
+  def sell(item, quantity)
+    if total_quantity(item) >= quantity
+
+    end
+  end
+
 end
