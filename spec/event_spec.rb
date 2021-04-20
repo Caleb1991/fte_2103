@@ -65,7 +65,7 @@ RSpec.describe Event do
       item_1 = Item.new(name: 'Peach Pie (Slice)', price: '$3.75')
       item_2 = Item.new(name: 'Apple Pie (Slice)', price: '$2.50')
       item_3 = Item.new(name: 'Peach-Raspberry Nice Cream', price: '$5.30')
-      item_4 = Item.new(name: 'Banana Nice Cream'm price: '$4.25')
+      item_4 = Item.new(name: 'Banana Nice Creamm', price: '$4.25')
       food_truck_2 = FoodTruck.new('Ba-Nom-a-Nom')
       food_truck_3 = FoodTruck.new('Palisade Peach Shack')
 
