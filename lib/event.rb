@@ -33,4 +33,30 @@ class Event
     end
     items_sold.uniq.sort
   end
+
+  def overstocked_items
+    overstock = []
+
+    @food_trucks.each do |truck|
+      truck.inventory.each do |item, quantity|
+        if food_trucks_that_sell(item).length >= 2 && total_quantity(item) > 50
+          overstock << item
+        end
+      end
+    end
+    overstock.uniq
+  end
+
+  def total_quantity(item)
+
+    quantity = 0
+    @food_trucks.each do |truck|
+      truck.inventory.each do |block_item, block_quantity|
+        if block_item == item
+          quantity += block_quantity
+        end
+      end
+    end
+    quantity
+  end
 end
