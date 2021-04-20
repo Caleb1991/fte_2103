@@ -19,6 +19,7 @@ RSpec.describe FoodTruck do
     it 'has no inventory by default' do
       food_truck = FoodTruck.new('Rocky Mountain Pies')
 
-      expect(food_truck.inventory).to eq([])
+      expect(food_truck.inventory).to eq({})
     end
   end
+end
