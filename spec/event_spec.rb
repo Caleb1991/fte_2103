@@ -165,7 +165,7 @@ RSpec.describe Event do
       item_1 = Item.new(name: 'Peach Pie (Slice)', price: '$3.75')
       item_2 = Item.new(name: 'Apple Pie (Slice)', price: '$2.50')
       item_3 = Item.new(name: 'Peach-Raspberry Nice Cream', price: '$5.30')
-      item_4 = Item.new(name: 'Banana Nice Creamm', price: '$4.25')
+      item_4 = Item.new(name: 'Banana Nice Cream', price: '$4.25')
       food_truck_2 = FoodTruck.new('Ba-Nom-a-Nom')
       food_truck_3 = FoodTruck.new('Palisade Peach Shack')
 
@@ -174,6 +174,7 @@ RSpec.describe Event do
       food_truck_2.stock(item_3, 25)
       food_truck_2.stock(item_4, 50)
       food_truck_3.stock(item_1, 65)
+      food_truck_3.stock(item_3, 10)
       event.add_food_truck(food_truck_1)
       event.add_food_truck(food_truck_2)
       event.add_food_truck(food_truck_3)
@@ -181,18 +182,18 @@ RSpec.describe Event do
       expected = {
         item_1 => {
           quantity: 100,
-          food_trucks: [food_truck_1, food_truck_2]
+          food_trucks: [food_truck_1, food_truck_3]
         },
         item_2 => {
           quantity: 7,
           food_trucks: [food_truck_1]
         },
         item_3 => {
-          quantity: 50,
-          food_trucks: [food_truck_2]
+          quantity: 35,
+          food_trucks: [food_truck_2, food_truck_3]
         },
         item_4 => {
-          quantity: 35,
+          quantity: 50,
           food_trucks: [food_truck_2]
         }
       }
