@@ -109,4 +109,28 @@ RSpec.describe Event do
       expect(event.sorted_item_list).to eq(expected)
     end
   end
+
+  describe '#overstocked_items' do
+    it 'shows which items are sold by more than one truck and quantity is over 50' do
+      event = Event.new('South Pearl Street Farmers Market')
+      food_truck_1 = FoodTruck.new('Rocky Mountain Pies')
+      item_1 = Item.new(name: 'Peach Pie (Slice)', price: '$3.75')
+      item_2 = Item.new(name: 'Apple Pie (Slice)', price: '$2.50')
+      item_3 = Item.new(name: 'Peach-Raspberry Nice Cream', price: '$5.30')
+      item_4 = Item.new(name: 'Banana Nice Creamm', price: '$4.25')
+      food_truck_2 = FoodTruck.new('Ba-Nom-a-Nom')
+      food_truck_3 = FoodTruck.new('Palisade Peach Shack')
+
+      food_truck_1.stock(item_1, 35)
+      food_truck_1.stock(item_2, 7)
+      food_truck_2.stock(item_3, 25)
+      food_truck_2.stock(item_4, 50)
+      food_truck_3.stock(item_1, 65)
+      event.add_food_truck(food_truck_1)
+      event.add_food_truck(food_truck_2)
+      event.add_food_truck(food_truck_3)
+
+      expect(event.overstocked_items).to eq([item_1])
+    end
+  end
 end
