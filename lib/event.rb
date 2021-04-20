@@ -48,8 +48,8 @@ class Event
   end
 
   def total_quantity(item)
-
     quantity = 0
+
     @food_trucks.each do |truck|
       truck.inventory.each do |block_item, block_quantity|
         if block_item == item
