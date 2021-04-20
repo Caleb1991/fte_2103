@@ -157,4 +157,47 @@ RSpec.describe Event do
       expect(event.total_quantity(item_1)).to eq(100)
     end
   end
+
+  describe '#total_inventory' do
+    it 'returns hash with item as key and value being a hash of total qunatity and food trucks that sell that item' do
+      event = Event.new('South Pearl Street Farmers Market')
+      food_truck_1 = FoodTruck.new('Rocky Mountain Pies')
+      item_1 = Item.new(name: 'Peach Pie (Slice)', price: '$3.75')
+      item_2 = Item.new(name: 'Apple Pie (Slice)', price: '$2.50')
+      item_3 = Item.new(name: 'Peach-Raspberry Nice Cream', price: '$5.30')
+      item_4 = Item.new(name: 'Banana Nice Creamm', price: '$4.25')
+      food_truck_2 = FoodTruck.new('Ba-Nom-a-Nom')
+      food_truck_3 = FoodTruck.new('Palisade Peach Shack')
+
+      food_truck_1.stock(item_1, 35)
+      food_truck_1.stock(item_2, 7)
+      food_truck_2.stock(item_3, 25)
+      food_truck_2.stock(item_4, 50)
+      food_truck_3.stock(item_1, 65)
+      event.add_food_truck(food_truck_1)
+      event.add_food_truck(food_truck_2)
+      event.add_food_truck(food_truck_3)
+
+      expected = {
+        item_1 => {
+          quantity: 100,
+          food_trucks: [food_truck_1, food_truck_2]
+        },
+        item_2 => {
+          quantity: 7,
+          food_trucks: [food_truck_1]
+        },
+        item_3 => {
+          quantity: 50,
+          food_trucks: [food_truck_2]
+        },
+        item_4 => {
+          quantity: 35,
+          food_trucks: [food_truck_2]
+        }
+      }
+
+      expect(event.total_inventory).to eq(expected)
+    end
+  end
 end
