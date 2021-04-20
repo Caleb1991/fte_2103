@@ -59,4 +59,26 @@ class Event
     end
     quantity
   end
+
+  def total_inventory
+    items = []
+
+    @food_trucks.each do |truck|
+      truck.inventory.each do |item, quantity|
+        items << item
+      end
+    end
+
+    unique_item_list = items.uniq
+
+    hash = {}
+
+    unique_item_list.each do |item|
+      hash[item] = {
+        quantity: total_quantity(item),
+        food_trucks: food_trucks_that_sell(item)
+      }
+    end
+    hash
+  end
 end
