@@ -224,6 +224,8 @@ RSpec.describe Event do
       event.add_food_truck(food_truck_3)
 
       expect(event.sell(item_1, 33)).to eq(true)
+      expect(food_truck_1.check_stock(item_1)).to eq(2)
+      expect(food_truck_3.check_stock(item_1)).to eq(65)
     end
   end
 end
