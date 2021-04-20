@@ -22,4 +22,15 @@ class Event
       truck.inventory.include?(item)
     end
   end
+
+  def sorted_item_list
+    items_sold = []
+
+    @food_trucks.each do |truck|
+      truck.inventory.each do |item, quantity|
+        items_sold << item.name
+      end
+    end
+    items_sold.uniq.sort
+  end
 end
